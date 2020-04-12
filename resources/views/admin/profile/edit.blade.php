@@ -15,36 +15,38 @@
                             @endforeach
                         </ul>
                     @endif
+                    <input type="hidden" name="id" value="{{ $profile_form->id }}">
+                    
                     <div class="form-group row">
-                        <label class="col-md-2">氏名(name)</label></label>
+                        <label class="col-md-2">氏名(name)</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}">
+                            <!--第一引数はもし更新ボタンを押してエラーになった際に入力した場所はそのまま表示されるようにする
+                            第二引数を指定してあげることで編集ボタンを押した際に最初に記入していた内容を取得して表示できる 
+                            波かっこがある時点でphpなので＄を書かなくてもいい可能性ある-->
                         </div>
                     </div>
                     
                      <div class="form-group row">
-                        <label class="col-md-2">性別(gender)</label></label>
+                        <label class="col-md-2">性別(gender)</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                            <input type="text" class="form-control" name="gender" value="{{ $profile_form->gender }}">
                         </div>
                     </div>
                     
                       <div class="form-group row">
-                        <label class="col-md-2">趣味(hobby)</label></label>
+                        <label class="col-md-2">趣味(hobby)</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                            <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby}}">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介欄(introduction)</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="10">{{$profile_form->introduction}}</textarea>
                         </div>
                     </div>
-                  
-                    
-                    
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>

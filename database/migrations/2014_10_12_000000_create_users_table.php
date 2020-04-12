@@ -22,15 +22,21 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+    
+    //App/Userにすれば正常に作動するs
+   /* User::create([
+      'name' =>"森本",       
+      'email' => "morimoto@tech.com",
+      'password' => Hash::make("pass"),
+       ]);
+       */
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
+    
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users'); 
     }
-}
+    
+   
+ }
