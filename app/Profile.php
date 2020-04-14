@@ -15,4 +15,15 @@ class Profile extends Model
         'hobby' => 'required',
         'introduction' => 'required',
     );
+    
+    public function historyprofiles()
+    {
+    return $this->hasMany('App\Historyprofile');
+    //テーブルに関連づいているhistoriesテーブルを全て取得するというメソッドになっています。ここだったらHistoriesテーブルに関連づけた（送った）
+    //profilesテーブルのレコード（行）全てを取得してる
+    
+    
+    //ここに関連づけるモデルの名前？
+
+    }
 }

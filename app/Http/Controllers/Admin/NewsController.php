@@ -3,6 +3,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
+use App\History;
+//Historyモデルを使うということ
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -40,7 +43,7 @@ public function add()//ニュース画面新規作成
     $news->save();
     //$newsの出はnewsクラスなのでニュースクラスに定義されたメソッドだとわかる
           
-    return redirect('admin/news/create');
+    return redirect('admin/news');
     }
       
       
@@ -125,6 +128,27 @@ public function add()//ニュース画面新規作成
                   //$news = News::find($request->id);で取得したテーブル情報を$news_formに入れて保存
                   
    $news->fill($news_form)->save();
+   
+   // 以下を追記
+   $history = new History;
+   //HIstoryクラス＝Historyモデルとかもここに含まれてる
+   
+   //historyクラスはhistoriesテーブルのカラムと全く同じものを持ってる
+  
+  
+   //historyクラスのプロパティ ＝historiesテーブルのカラム
+   $history->news_id = $news->id;
+   //ここだったらhistoryクラスのnews_idというプロパティ を参照してる
+   
+   //Historyクラス内では$news_idというプロパティは定義されていない
+  //しかしフレームワークの仕様でhistoriesというテーブルが持ってるカラムを自動的にHistory.phpはカラムとして紐づけてくれるので持てる
+   
+   $history->edited_at = Carbon::now();
+   //Carbon を使って取得した現在時刻を、History モデルの edited_at として記録します。
+   
+   
+   $history->save();
+   //ここでデータベースに$history->news_id = $news->id;で入れた情報を書き込んでいる処理をしている
             
     return redirect('admin/news');
     }

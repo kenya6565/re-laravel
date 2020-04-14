@@ -16,6 +16,8 @@
                         </ul>
                     @endif
                     <input type="hidden" name="id" value="{{ $profile_form->id }}">
+                    <!--編集画面でボタンが押された瞬間にidというキーがupdateメソッドに渡されてupdateメソッド内でidが呼ばれたときに $profile_form->idが値として取り出される
+                     $profile_form->idとは更新された後の情報-->
                     
                     <div class="form-group row">
                         <label class="col-md-2">氏名(name)</label>
@@ -50,6 +52,19 @@
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>
+                <div class="row mt-5">
+                    <div class="col-md-4 mx-auto">
+                        <h2>編集履歴</h2>
+                        <ul class="list-group">
+                            @if ($profile_form->historyprofiles != NULL)
+                                @foreach ($profile_form->historyprofiles as $history)
+                                <!--ここには更新された情報のみが欲しいから$profile_formを使ってる-->
+                                    <li class="list-group-item">{{ $history->edited_at }}</li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

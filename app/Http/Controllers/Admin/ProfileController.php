@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Historyprofile;
 
 
 use App\Profile;
@@ -88,12 +90,23 @@ class ProfileController extends Controller
                     
     $profile_form = $request->all();
     //書き換えられた新データをこっちで入れてる
+    //dd($profile_form);
     
      unset($profile_form['_token']);
      //トークンを消す
     
     $profile->fill($profile_form)->save();
     //$profileに＄profile_formの新情報を入れてSaveしてる
+    
+    
+    
+    $history = new Historyprofile;
+    
+    $history->profile_id = $profile->id;
+    
+    $history->edited_at = Carbon::now();
+    
+    $history->save();
     
     
   
