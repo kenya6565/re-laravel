@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-     protected $guarded = array('id');
+     protected $guarded = array('gender');
 
     // 以下を追記
     public static $rules = array(

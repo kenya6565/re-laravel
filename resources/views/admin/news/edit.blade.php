@@ -58,6 +58,7 @@
                         <ul class="list-group">
                             @if ($news_form->histories != NULL)
                                 @foreach ($news_form->histories as $history)
+                                <!--$news_formには、newsレコードが入っている-->
                                     <li class="list-group-item">{{ $history->edited_at }}</li>
                                 @endforeach
                             @endif

@@ -57,7 +57,7 @@
                                         <div> <!--URLを生成しているURLではidと表示されそれにより＄newsのI'dが呼び出されている-->
                                               <!--editアクションにidというキーを渡している、それでそのidが呼ばれたときには$profileの中から特定のId情報を取り出す-->
                                             
-                                            <a href="{{ action('Admin\ProfileController@edit', [ 'id' => $profile->id]) }}">編集</a>
+                                            <a href="{{ action('Admin\ProfileController@edit', [ 'id' => $profile->id])}}">編集</a>
                                         </div>
                                          <div>
                                             <a href="{{ action('Admin\ProfileController@delete', ['id' => $profile->id]) }}">削除</a>
