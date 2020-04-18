@@ -26,6 +26,26 @@ class ProfileController extends Controller
 
  $profile = new Profile;
  $form = $request->all();
+ 
+  if (isset($form['image']))
+        {
+            $path = $request->file('image')->store('public/image');//public diractoryにあるimage diractoryに保存
+                
+            $profile->image_path = basename($path);
+            /*$news = new News;により$newsにはニュースクラスの情報が入ってる。
+            この場合newsモデル（クラス名と同義)にあるインスタンス変数image_pathを呼び出している。
+            それというのはnewsモデルのマイグレーションファイルで作ったimage_pathカラムと同じものを指すことになる*/
+            
+        }
+        else
+        {
+            $news->image_path = null;
+        }
+
+        // フォームから送信されてきた_tokenを削除する
+        unset($form['_token']);
+        // フォームから送信されてきたimageを削除する
+        unset($form['image']);
 
 
 

@@ -57,6 +57,7 @@
                         <h2>編集履歴</h2>
                         <ul class="list-group">
                             @if ($news_form->histories != NULL)
+                            <!--$news_formの中身は$news = News::find($request->id);-->
                                 @foreach ($news_form->histories as $history)
                                 <!--$news_formには、newsレコードが入っている-->
                                     <li class="list-group-item">{{ $history->edited_at }}</li>

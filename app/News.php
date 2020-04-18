@@ -22,7 +22,7 @@ class News extends Model
     {
       return $this->hasMany('App\History');
       //レコードを複数取得する
-
+        //この$thisはnewsクラス、historyテーブルを全て取得する
     }
 }
 

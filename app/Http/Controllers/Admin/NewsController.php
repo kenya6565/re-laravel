@@ -25,11 +25,16 @@ class NewsController extends Controller
         $form = $request->all(); //$requestに入ってる全てのオブジェクトを連想配列で＄formに代入
         //formタグで囲まれた全てのinputタグを入手
         // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
+        //issetメソッドが使われています。このメソッドは引数の中にデータがあるかないかを判断するメソッドになります。
         if (isset($form['image']))
         {
-            $path = $request->file('image')
-                ->store('public/image');
+            $path = $request->file('image')->store('public/image');//public diractoryにあるimage diractoryに保存
+                
             $news->image_path = basename($path);
+            /*$news = new News;により$newsにはニュースクラスの情報が入ってる。
+            この場合newsモデル（クラス名と同義)にあるインスタンス変数image_pathを呼び出している。
+            それというのはnewsモデルのマイグレーションファイルで作ったimage_pathカラムと同じものを指すことになる*/
+            
         }
         else
         {
@@ -83,6 +88,8 @@ class NewsController extends Controller
     
 
     public function edit(Request $request)
+    /*$requestの中身はindexの ['id' => $news->id, 'hoge'=> $news->body]
+    foreach内なのでどのI'dを指しているかわかるというロジック*/
     //ニュース編集画面
     
     {
@@ -139,12 +146,14 @@ class NewsController extends Controller
 
         // 以下を追記
         $history = new History;
+        //Newで空のモデルを作成してる
         //HIstoryクラス＝Historyモデルとかもここに含まれてる
         //historyクラスはhistoriesテーブルのカラムと全く同じものを持ってる
         
 
         //historyクラスのプロパティ ＝historiesテーブルのカラム
         $history->news_id = $news->id;
+        //空のモデルにNews_idを入れてる
         //ここだったらhistoryクラスのnews_idというプロパティ を参照してる
         //Historyクラス内では$news_idというプロパティは定義されていない
         //しかしフレームワークの仕様でhistoriesというテーブルが持ってるカラムを自動的にHistory.phpはカラムとして紐づけてくれるので持てる

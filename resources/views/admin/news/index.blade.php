@@ -43,6 +43,7 @@
                         </thead>
                         <tbody>
                             @foreach($posts as $news)
+                            <!--一週目はテーブルのid１を取り出して２週目は２を取り出して以下を行う〜というような動き-->
                                 <tr>
                                     <th>{{ $news->id }}</th>
                                     <td>{{ str_limit($news->title, 100) }}</td>
@@ -50,6 +51,8 @@
                                     <td>
                                         <div> <!--URLを生成しているURLではidと表示されそれにより＄newsのI'dが呼び出されている-->
                                             <a href="{{ action('Admin\NewsController@edit', ['id' => $news->id, 'hoge'=> $news->body]) }}">編集</a>
+                                            <!--view→controllerに対する動き -->
+                                            <!--foreach内だから1週目のときはこのI'dという風に特定できる-->
                                         </div>
                                          <div>
                                             <a href="{{ action('Admin\NewsController@delete', ['id' => $news->id]) }}">削除</a>
